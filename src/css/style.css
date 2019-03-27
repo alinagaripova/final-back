@@ -1,0 +1,47 @@
+.dialogues-box {
+    float: left;
+    width: 35%;
+    max-width: 400px;
+    height: 500px;
+    border: lightgray solid 1px;
+}
+#search {
+    float: left;
+    width: 53%;
+    height: 38px;
+}
+.start-chat {
+    float: left;
+    margin-left: 2%;
+    width: 45%;
+}
+img {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
+.dialogues-block {
+    float: left;
+    margin: 0;
+    width: 399px;
+    max-width: 99%;
+}
+.dialogues-list {
+    margin: 0;
+    padding: 0;
+
+}
+[data-class=dialogues-element] {
+    list-style: none;
+    display: block;
+    height: 40px;
+    border-bottom: lightgray solid 1px;
+}
+.chat {
+    float: left;
+    width: 64%;
+    max-width: 800px;
+    height: 500px;
+    border: lightgray solid 1px;
+    border-left: none;
+}

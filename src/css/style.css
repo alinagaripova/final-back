@@ -44,4 +44,29 @@ img {
     height: 500px;
     border: lightgray solid 1px;
     border-left: none;
+    position: relative;
+    padding: 0;
 }
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+footer input{
+    display: inline-block;
+    float: left;
+    width: 75%;
+    margin: 0;
+}
+footer button {
+    display: inline-block;
+    float: left;
+    width: 25%;
+    margin: 0;
+    padding: 1px 3px;
+}
+/*[data-class=chat-title] {*/
+/*}*/
+/*[data-class=chat-send] {*/
+    /*float: bottom;*/
+/*}*/

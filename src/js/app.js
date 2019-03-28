@@ -36,7 +36,7 @@ for (const companion of companions) {
     })
 }
 
-function rebuildDialogueList(dialogueListEl, dialogueList1) {                //пересобирает дерево
+function rebuildDialogueList(dialogueListEl, dialogueList1) {                //создание списка диалогов
     dialogueListEl.innerHTML = ' ';
     for (const item of dialogueList1.items) {
         const liEl = document.createElement('li');
@@ -83,14 +83,13 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
 
         if (messageText !== '') {
             messageList.add(message);
+            rebuildMessageList(chatEl, messageList, itemName, messageText);
         }
 
         messageTextEl.value = '';
-        rebuildMessageList(chatEl, messageList, itemName, messageText);
-
     })
 }
-function rebuildMessageList(chatEl, messageList, itemName, messageText) {
+function rebuildMessageList(chatEl, messageList, itemName, messageText) {       //создание сообщения
         const divEl = document.createElement('div');
         divEl.innerHTML = `
             <span>You: ${messageText}</span>

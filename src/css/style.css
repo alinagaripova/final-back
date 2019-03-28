@@ -5,17 +5,26 @@
     height: 500px;
     border: lightgray solid 1px;
 }
+header {
+    height: 50px;
+    background-color: lightgray;
+}
 #search {
     float: left;
     width: 53%;
     height: 38px;
+    margin-top: 1%;
+    border-radius: 5px;
+    vertical-align: center;
 }
 .start-chat {
     float: left;
-    margin-left: 2%;
+    margin: 1%;
     width: 45%;
+    height: 38px;
+    vertical-align: center;
 }
-img {
+.dropdown-menu img {
     height: 20px;
     width: 20px;
     margin-right: 5px;
@@ -24,7 +33,7 @@ img {
     float: left;
     margin: 0;
     width: 399px;
-    max-width: 99%;
+    max-width: 100%;
 }
 .dialogues-list {
     margin: 0;
@@ -34,9 +43,29 @@ img {
 [data-class=dialogues-element] {
     list-style: none;
     display: block;
-    height: 40px;
+    height: 50px;
     border-bottom: lightgray solid 1px;
 }
+[data-class=dialogues-element]:hover {
+    background-color: lightgray;
+}
+[data-id=img] {
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+}
+[data-id=name] {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
+/*[data-notactive=not-active] {*/
+    /*background-color: white;*/
+/*}*/
+/*[data-active=active] {*/
+    /*background-color: lightgray;*/
+/*}*/
 .chat {
     float: left;
     width: 64%;
@@ -47,22 +76,32 @@ img {
     position: relative;
     padding: 0;
 }
-footer {
+
+footer{
     position: absolute;
     width: 100%;
     bottom: 0;
+    height: 40px;
+    background-color: lightgray;
 }
+footer form {
+    width: 100%;
+}
+
 footer input{
     display: inline-block;
     float: left;
-    width: 75%;
-    margin: 0;
+    max-height: 30px;
+    min-width: 65%;
+    margin: 1%;
+    /*border-radius: 3px; !important;*/
 }
 footer button {
     display: inline-block;
     float: left;
-    width: 25%;
+    min-width: 20%;
     margin: 0;
+    height: 40px;
     padding: 1px 3px;
 }
 /*[data-class=chat-title] {*/

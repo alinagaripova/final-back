@@ -1,9 +1,8 @@
 export class Dialogue {                         //чат
-    constructor(name, image, id, message) {
+    constructor(name, image, id) {
         this.name = name;
         this.image = image;
         this.id = id;
-        this.message = message;  //todo:вывод последнего сообщения в списке диалогов
     }
 }
 
@@ -29,7 +28,6 @@ export class Message {                          //сообщение
     constructor(name, text, time) {
         this.name = name;
         this.text = text;
-        this.time = time;   //todo: вывод времени
     }
 }
 export class MessageList {                     //чат с сообщениями

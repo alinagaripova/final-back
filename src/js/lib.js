@@ -3,7 +3,7 @@ export class Dialogue {                         //чат
         this.name = name;
         this.image = image;
         this.id = id;
-        this.message = message;
+        this.message = message;  //todo:вывод последнего сообщения в списке диалогов
     }
 }
 
@@ -29,7 +29,7 @@ export class Message {                          //сообщение
     constructor(name, text, time) {
         this.name = name;
         this.text = text;
-        this.time = time;
+        this.time = time;   //todo: вывод времени
     }
 }
 export class MessageList {                     //чат с сообщениями

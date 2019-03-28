@@ -91,7 +91,7 @@ function rebuildMessageList(chatEl, messageList, itemName) {//создание �
         if (item.name == itemName) {
             const divEl = document.createElement('div');
             divEl.innerHTML = `
-                <span>${item.name}: ${item.text}</span>
+                <span>You: ${item.text}</span>
             `;
             chatEl.appendChild(divEl);
         }

@@ -24,13 +24,13 @@ export class DialogueList {                     //список чатов
     }
 }
 
-export class Message {                          //сообщение
+export class Message {                          //сообщение от you
     constructor(name, text, time) {
         this.name = name;
         this.text = text;
     }
 }
-export class MessageList {                     //чат с сообщениями
+export class MessageList {                     //список сообщений от you
     constructor() {
         const savedItems = JSON.parse(localStorage.getItem('MessageList'));
         if (savedItems !== null) {
@@ -45,5 +45,29 @@ export class MessageList {                     //чат с сообщениям�
     }
     save() {
         localStorage.setItem('MessageList', JSON.stringify(this.items));
+    }
+}
+
+export class SecondMessage {                          //сообщение от собеседника
+    constructor(name, text, time) {
+        this.name = name;
+        this.text = text;
+    }
+}
+export class SecondMessageList {                     //список сообщений от собеседника
+    constructor() {
+        const savedItems = JSON.parse(localStorage.getItem('SecondMessageList'));
+        if (savedItems !== null) {
+            this.items = savedItems;
+        } else {
+            this.items = [];
+        }
+    }
+    add(item) {                                 //добавление сообщения в чат
+        this.items.push(item);
+        this.save();
+    }
+    save() {
+        localStorage.setItem('SecondMessageList', JSON.stringify(this.items));
     }
 }

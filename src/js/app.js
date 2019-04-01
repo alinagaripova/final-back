@@ -1,5 +1,6 @@
 import {Dialogue, DialogueList, Message, MessageList} from "./lib.js";
 import {checkDialogues} from "./valid.js";
+import {SecondMessage, SecondMessageList} from "./lib.js";
 
 
 const startChatEl = document.querySelector('.start-chat');
@@ -10,6 +11,7 @@ const chatEl = document.querySelector('.chat');
 const companions = Array.from(companionEl);
 const dialogueList = new DialogueList();
 const messageList = new MessageList();
+const messageList2 = new SecondMessageList();
 
 let id = 0;
 for (const companion of companions) {
@@ -61,11 +63,15 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
     const footerEl = document.createElement('footer');          //создание footer
     footerEl.setAttribute('data-class', 'chat-send');
     footerEl.innerHTML = `
-        <form data-id="form-send" class="form-inline">
+        <form data-id="form-send" class="form-inline">                        
             <input data-id="message-text"  class="form-control" type="text" placeholder="Введите сообщение" autofocus>
             <button data-id="send" class="btn btn-secondary">Отправить</button>
         </form>
-    `;
+         <form data-id="form-send2" class="form-inline">
+            <input data-id="message-text2"  class="form-control" type="text" placeholder="Введите сообщение" autofocus>
+            <button data-id="send2" class="btn btn-secondary">Отправить</button>
+        </form>
+    `;                                                                //первый отправитель(you), второй(собеседник)
     chatEl.appendChild(headerEl);
     chatEl.appendChild(footerEl);
 
@@ -73,7 +79,7 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
     const messageTextEl = footerEl.querySelector('[data-id=message-text]');
 
     sendEl.addEventListener('submit', (evt) => {        //событие на кнопке 'отправить' сообщение
-        evt.preventDefault();
+        evt.preventDefault();                                        //первый инпут(you)
         const messageText = messageTextEl.value;
         const message = new Message(itemName, messageText);
 
@@ -83,10 +89,25 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
         }
         messageTextEl.value = '';
     });
-    rebuildMessageList(chatEl, messageList, itemName);
+
+    const send2El = footerEl.querySelector('[data-id=form-send2]');
+    const messageText2El = footerEl.querySelector('[data-id=message-text2]');
+
+    send2El.addEventListener('submit', (evt) => {        //событие на кнопке 'отправить' сообщение
+        evt.preventDefault();                                        //второй инпут(собеседник)
+        const messageText2 = messageText2El.value;
+        const message2 = new SecondMessage(itemName, messageText2);
+
+        if (messageText2 !== '') {
+            messageList2.add(message2);
+            createChat(dialogueList1, chatEl, itemImage, itemName);
+        }
+        messageText2El.value = '';
+    });
+    rebuildMessageList(chatEl, messageList, messageList2, itemName);
 
 }
-function rebuildMessageList(chatEl, messageList, itemName) {//создание сообщения
+function rebuildMessageList(chatEl, messageList, messageList2, itemName) {//создание сообщения
     for (const item of messageList.items) {
         if (item.name == itemName) {
             const divEl = document.createElement('div');
@@ -94,6 +115,18 @@ function rebuildMessageList(chatEl, messageList, itemName) {//создание �
             divEl.innerHTML = `
                 <div class="you-text">
                     <span>You: ${item.text}</span>
+                </div>
+            `;
+            chatEl.appendChild(divEl);
+        }
+    }
+    for (const item of messageList2.items) {
+        if (item.name == itemName) {
+            const divEl = document.createElement('div');
+            divEl.className = 'companion-block';
+            divEl.innerHTML = `
+                <div class="companion-text">
+                    <span>${item.name}: ${item.text}</span>
                 </div>
             `;
             chatEl.appendChild(divEl);

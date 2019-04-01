@@ -1,6 +1,5 @@
 import {Dialogue, DialogueList, Message, MessageList} from "./lib.js";
 import {checkDialogues} from "./valid.js";
-import {SecondMessage, SecondMessageList} from "./lib.js";
 
 
 const startChatEl = document.querySelector('.start-chat');
@@ -11,7 +10,7 @@ const chatEl = document.querySelector('.chat');
 const companions = Array.from(companionEl);
 const dialogueList = new DialogueList();
 const messageList = new MessageList();
-const messageList2 = new SecondMessageList();
+
 
 let id = 0;
 for (const companion of companions) {
@@ -23,7 +22,7 @@ for (const companion of companions) {
     const dialogue = new Dialogue(name, image, id);
 
     companion.addEventListener('click', (evt) => {      //при клике создается новый чат
-        let id = companion.attributes[1].value;     //TODO
+        let id = companion.attributes[1].value;
         console.log(id);
 
         if (checkDialogues(id, dialogueList) > 0) {                 //проверяет существует ли такой чат
@@ -46,18 +45,18 @@ function rebuildDialogueList(dialogueListEl, dialogueList1) {                //�
         `;
 
         liEl.addEventListener('click', () => {
-            createChat(dialogueList, chatEl, item.image, item.name);       //создание окна чата
+            createChat(dialogueList, chatEl, item.image, item.name, item.id);       //создание окна чата
         });
         dialogueListEl.appendChild(liEl);
     }
 }
 
-function createChat(dialogueList1, chatEl, itemImage, itemName) {        //создание окна чата
+function createChat(dialogueList1, chatEl, itemImage, itemName, itemId) {        //создание окна чата
     chatEl.innerHTML = '';
     const headerEl = document.createElement('header');          //создание header
     headerEl.setAttribute('data-class', 'chat-title');
     headerEl.innerHTML = `
-       <img data-id="img" alt="photo" src="${itemImage}"><span>${itemName}</span>
+       <img data-id="img" alt="photo" src="${itemImage}" id="${itemId}"><span>${itemName}</span>
     `;
 
     const centerEl = document.createElement('div');
@@ -85,11 +84,11 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
     sendEl.addEventListener('submit', (evt) => {        //событие на кнопке 'отправить' сообщение
         evt.preventDefault();                                        //первый инпут(you)
         const messageText = messageTextEl.value;
-        const message = new Message(itemName, messageText);
+        const message = new Message('Алина', messageText, itemId);
 
         if (messageText !== '') {
             messageList.add(message);
-            createChat(dialogueList1, chatEl, itemImage, itemName);
+            createChat(dialogueList1, chatEl, itemImage, itemName, itemId);
         }
         messageTextEl.value = '';
     });
@@ -100,43 +99,44 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
     send2El.addEventListener('submit', (evt) => {        //второй инпут(собеседник)
         evt.preventDefault();
         const messageText2 = messageText2El.value;
-        const message2 = new SecondMessage(itemName, messageText2);
+        const message2 = new Message(itemName, messageText2, itemId);
 
         if (messageText2 !== '') {
-            messageList2.add(message2);
-            createChat(dialogueList1, chatEl, itemImage, itemName);
+            messageList.add(message2);
+            createChat(dialogueList1, chatEl, itemImage, itemName, itemId);
         }
         messageText2El.value = '';
     });
-    rebuildMessageList(centerEl, messageList, messageList2, itemName);
+    rebuildMessageList(centerEl, messageList, itemId, itemName);
 
 }
-function rebuildMessageList(centerEl, messageList, messageList2, itemName) {//создание листа сообщений
-    for (const item of messageList.items) {                                 //сообщения you
-        if (item.name == itemName) {
-            const divEl = document.createElement('div');
-            divEl.className = 'you-block';
-            divEl.innerHTML = `
-                <div class="you-text">
-                    <span>You: ${item.text}</span>
-                </div>
-            `;
-            centerEl.appendChild(divEl);
-        }
-    }
-    for (const item of messageList2.items) {                                //сообщения собеседника
-        if (item.name == itemName) {
-            const divEl = document.createElement('div');
-            divEl.className = 'companion-block';
-            divEl.innerHTML = `
+
+function rebuildMessageList(centerEl, messageList, itemId, itemName) {//создание листа сообщений
+    for (const item of messageList.items) {
+        if (item.id == itemId) {
+            if (item.name == itemName) {
+                const divEl = document.createElement('div');
+                divEl.className = 'companion-block';
+                divEl.innerHTML = `
                 <div class="companion-text">
                     <span>${item.name}: ${item.text}</span>
                 </div>
             `;
-            centerEl.appendChild(divEl);
+                centerEl.appendChild(divEl);
+            } else {
+                const divEl = document.createElement('div');
+                divEl.className = 'you-block';
+                divEl.innerHTML = `
+                <div class="you-text">
+                    <span>You: ${item.text}</span>
+                </div>
+            `;
+                centerEl.appendChild(divEl);
+            }
         }
     }
 }
+
 rebuildDialogueList(dialogueListEl, dialogueList);
 
 

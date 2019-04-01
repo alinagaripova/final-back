@@ -88,6 +88,7 @@ footer input{
     min-width: 78%;
     margin: 1%;
 }
+
 footer button {
     display: inline-block;
     float: left;
@@ -96,3 +97,17 @@ footer button {
     height: 40px;
     padding: 1px 3px;
 }
+.you-block {
+    text-align: right;
+    margin: 1% 1% 1% 30%;
+    word-wrap: break-word;
+}
+.you-text {
+    display: inline-block;
+    background-color: lightblue;
+    border: lightgray solid 1px;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+

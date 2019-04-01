@@ -62,7 +62,7 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
     footerEl.setAttribute('data-class', 'chat-send');
     footerEl.innerHTML = `
         <form data-id="form-send" class="form-inline">
-            <input data-id="message-text"  class="form-control" type="text" placeholder="Введите сообщение">
+            <input data-id="message-text"  class="form-control" type="text" placeholder="Введите сообщение" autofocus>
             <button data-id="send" class="btn btn-secondary">Отправить</button>
         </form>
     `;
@@ -90,8 +90,11 @@ function rebuildMessageList(chatEl, messageList, itemName) {//создание �
     for (const item of messageList.items) {
         if (item.name == itemName) {
             const divEl = document.createElement('div');
+            divEl.className = 'you-block';
             divEl.innerHTML = `
-                <span>You: ${item.text}</span>
+                <div class="you-text">
+                    <span>You: ${item.text}</span>
+                </div>
             `;
             chatEl.appendChild(divEl);
         }

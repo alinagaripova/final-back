@@ -38,6 +38,7 @@ header {
 .dialogues-list {
     margin: 0;
     padding: 0;
+    overflow-y: auto;
 
 }
 [data-class=dialogues-element] {
@@ -68,9 +69,16 @@ header {
     border-left: none;
     position: relative;
     padding: 0;
-    overflow: auto;
+    /*overflow: auto;*/
 }
-
+.center {
+    overflow-y: scroll;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+}
 footer{
     position: absolute;
     width: 100%;

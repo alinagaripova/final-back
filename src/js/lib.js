@@ -63,7 +63,7 @@ export class SecondMessageList {                     //список сообще
             this.items = [];
         }
     }
-    add(item) {                                 //добавление сообщения в чат
+    add(item) {
         this.items.push(item);
         this.save();
     }

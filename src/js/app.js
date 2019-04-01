@@ -60,6 +60,9 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
        <img data-id="img" alt="photo" src="${itemImage}"><span>${itemName}</span>
     `;
 
+    const centerEl = document.createElement('div');
+    centerEl.className = 'center';
+
     const footerEl = document.createElement('footer');          //создание footer
     footerEl.setAttribute('data-class', 'chat-send');
     footerEl.innerHTML = `
@@ -74,6 +77,7 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
     `;                                                                //первый отправитель(you), второй(собеседник)
     chatEl.appendChild(headerEl);
     chatEl.appendChild(footerEl);
+    chatEl.appendChild(centerEl);
 
     const sendEl = footerEl.querySelector('[data-id=form-send]');
     const messageTextEl = footerEl.querySelector('[data-id=message-text]');
@@ -93,8 +97,8 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
     const send2El = footerEl.querySelector('[data-id=form-send2]');
     const messageText2El = footerEl.querySelector('[data-id=message-text2]');
 
-    send2El.addEventListener('submit', (evt) => {        //событие на кнопке 'отправить' сообщение
-        evt.preventDefault();                                        //второй инпут(собеседник)
+    send2El.addEventListener('submit', (evt) => {        //второй инпут(собеседник)
+        evt.preventDefault();
         const messageText2 = messageText2El.value;
         const message2 = new SecondMessage(itemName, messageText2);
 
@@ -104,11 +108,11 @@ function createChat(dialogueList1, chatEl, itemImage, itemName) {        //со�
         }
         messageText2El.value = '';
     });
-    rebuildMessageList(chatEl, messageList, messageList2, itemName);
+    rebuildMessageList(centerEl, messageList, messageList2, itemName);
 
 }
-function rebuildMessageList(chatEl, messageList, messageList2, itemName) {//создание сообщения
-    for (const item of messageList.items) {
+function rebuildMessageList(centerEl, messageList, messageList2, itemName) {//создание листа сообщений
+    for (const item of messageList.items) {                                 //сообщения you
         if (item.name == itemName) {
             const divEl = document.createElement('div');
             divEl.className = 'you-block';
@@ -117,10 +121,10 @@ function rebuildMessageList(chatEl, messageList, messageList2, itemName) {//со
                     <span>You: ${item.text}</span>
                 </div>
             `;
-            chatEl.appendChild(divEl);
+            centerEl.appendChild(divEl);
         }
     }
-    for (const item of messageList2.items) {
+    for (const item of messageList2.items) {                                //сообщения собеседника
         if (item.name == itemName) {
             const divEl = document.createElement('div');
             divEl.className = 'companion-block';
@@ -129,7 +133,7 @@ function rebuildMessageList(chatEl, messageList, messageList2, itemName) {//со
                     <span>${item.name}: ${item.text}</span>
                 </div>
             `;
-            chatEl.appendChild(divEl);
+            centerEl.appendChild(divEl);
         }
     }
 }

@@ -31,6 +31,7 @@ for (const companion of companions) {
             dialogueList.add(dialogue);                             //добавляет чат в список чатов
         }
         rebuildDialogueList(dialogueListEl, dialogueList);
+        createChat(dialogueList, chatEl, image, name, id);
     })
 }
 

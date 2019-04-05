@@ -4,7 +4,7 @@ node_js:
 deploy:
   provider: heroku
   api_key: $HEROKU_KEY
-  app: final-project
+  app: final-project-aln
 
 #install:
 #  - npm i

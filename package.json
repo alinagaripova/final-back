@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "browser-sync start -s \"src\" -f \".\"",
-    "test": "jest",
+    "start": "nodemon ./backend/rest.js",
     "coverage": "jest --coverage"
   },
   "babel": {
@@ -20,9 +20,13 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "browser-sync": "^2.26.3",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.10"
   },
-  "dependencies": {},
+  "dependencies": {
+    "restify": "^8.2.0",
+    "restify-errors": "^7.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alinagaripova/final-project-chat.git"

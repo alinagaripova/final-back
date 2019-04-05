@@ -6,26 +6,6 @@ export class Dialogue {                         //чат
     }
 }
 
-export class DialogueList {                     //список чатов
-    constructor() {
-        const savedItems = JSON.parse(localStorage.getItem('DialogueList'));
-        if (savedItems !== null) {
-            this.items = savedItems;
-        } else {
-            this.items = [];
-        }
-    }
-
-    add(item) {                                 //добавление чата в начало списка чатов
-        this.items.unshift(item);
-        this.save();
-    }
-
-    save() {
-        localStorage.setItem('DialogueList', JSON.stringify(this.items));
-    }
-}
-
 export class Message {                          //сообщение
     constructor(name, text, id) {
         this.name = name;    //моё
@@ -33,24 +13,3 @@ export class Message {                          //сообщение
         this.id = id;
     }
 }
-
-export class MessageList {                     //список сообщений
-    constructor() {
-        const savedItems = JSON.parse(localStorage.getItem('MessageList'));
-        if (savedItems !== null) {
-            this.items = savedItems;
-        } else {
-            this.items = [];
-        }
-    }
-
-    add(item) {                                 //добавление сообщения в чат
-        this.items.push(item);
-        this.save();
-    }
-
-    save() {
-        localStorage.setItem('MessageList', JSON.stringify(this.items));
-    }
-}
-

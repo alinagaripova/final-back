@@ -43,6 +43,8 @@ server.post('/messagelist', (req, res, next) => { //Запрос сообщен�
 
 });
 
-server.listen(2525, () => {
+const port = process.env.PORT || 2525;
+
+server.listen(port, () => {
     console.log('server started');
 });

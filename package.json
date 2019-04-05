@@ -8,6 +8,9 @@
     "coverage": "jest --coverage",
     "test": "exit 0"
   },
+  "engines": {
+    "node":"10.x"
+  },
   "babel": {
     "presets": [
       "@babel/preset-env"

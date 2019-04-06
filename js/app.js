@@ -2,7 +2,8 @@ import {Dialogue, Message} from "./lib.js";
 import {checkDialogues} from "./valid.js";
 import {Http} from './http.js';
 
-const http = new Http('http://localhost:2525');
+// const http = new Http('http://localhost:2525');
+const http = new Http('https://final-project-aln.herokuapp.com');
 const startChatEl = document.querySelector('.start-chat');
 const dialogueListEl = document.querySelector('.dialogues-list');
 const companionEl = document.querySelectorAll('.companion');

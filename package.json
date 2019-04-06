@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "browser-sync start -s \"src\" -f \".\"",
-    "start": "nodemon ./backend/rest.js",
+    "start": "node ./backend/rest.js",
     "coverage": "jest --coverage",
     "test": "exit 0"
   },

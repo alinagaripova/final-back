@@ -19,6 +19,18 @@ server.pre((req, res, next) => {
 
 let dialogueList = [];
 let messageList =[];
+let users = [
+    {id: 1, name: 'Миша', image: 'img/1.jpg'},
+    {id: 2, name: 'Саша', image: 'img/2.png'},
+    {id: 3, name: 'Алиса', image: 'img/3.jpg'},
+    {id: 4, name: 'Миша', image: 'img/4.jpg'},
+    {id: 5, name: 'Ваня', image: 'img/5.jpg'}
+];
+
+server.get('/users', (req, res, next) => { //запрос/ответ списка пользователей
+    res.send(users);
+    next();
+});
 
 server.get('/dialoguelist', (req, res, next) => { //запрос/ответ списка контактов
     res.send(dialogueList);
